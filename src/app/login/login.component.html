@@ -1,0 +1,23 @@
+<!-- FILEPATH: /c:/Users/HP/Documents/Jeff/M1 MIAGE/Javascript/TPs/tp1-angular-mahussidatongnon/src/app/login/login.component.html -->
+
+<mat-card>
+    <mat-card-title>Login</mat-card-title>
+    <mat-card-content>
+        <form ngForm (submit)="onSubmit()">
+            <mat-form-field>
+                <mat-icon matPrefix>account_circle</mat-icon>
+                <input matInput placeholder="login" [(ngModel)]="login" name="login" required>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                <mat-icon matPrefix>lock</mat-icon>
+                <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="{{hidePassword ? 'password' : 'text'}}" required>
+                <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+            <br>
+            <button mat-raised-button color="primary">Login</button>
+        </form>
+    </mat-card-content>
+</mat-card>

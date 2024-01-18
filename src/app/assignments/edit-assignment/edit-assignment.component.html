@@ -1,0 +1,22 @@
+<div class="container" *ngIf="assignment; else aucunAssignment">
+    <h1>Edition de l'assignment: {{ assignment.nom }} </h1>
+    <form ngForm [ngClass]="'form'" #formUpdate (submit)="onSaveAssignment(); formUpdate.reset()" >
+        <mat-form-field>
+            <input matInput placeholder="Edition du nom" [(ngModel)]="nomAssignment" name="assignment-name">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Edition de la date" [(ngModel)]="dateDeRendu" name="date">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button mat-raised-button color="primary" [disabled]="((!nomAssignment)||(!dateDeRendu))">
+            Enregistrer
+        </button>
+    </form>
+</div>
+<ng-template #aucunAssignment>
+    <div>
+        Aucun assignment à éditer
+    </div>
+</ng-template>

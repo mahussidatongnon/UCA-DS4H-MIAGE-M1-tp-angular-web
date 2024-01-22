@@ -11,7 +11,7 @@ import { bdInitialAssignments } from './data';
 })
 export class AssignmentsService {
 
-  base_api: string = "http://localhost:8010/api";
+  base_api: string = "https://uca-ds4h-miage-tp-final-angular-mm-api.onrender.com/api";
 
   assignments!: Assignment[];
 

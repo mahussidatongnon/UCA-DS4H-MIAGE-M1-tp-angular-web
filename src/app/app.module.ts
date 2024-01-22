@@ -18,6 +18,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HttpClientModule } from '@angular/common/http';
+import { MatPaginatorModule} from '@angular/material/paginator';
 
 import { AppComponent } from './app.component';
 import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component'
@@ -55,7 +56,8 @@ import { LoginComponent } from './login/login.component'; // CLI imports AppRout
     MatCardModule,
     MatCheckboxModule,
     MatSlideToggleModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

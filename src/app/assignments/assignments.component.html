@@ -4,6 +4,7 @@
             Ajouter Assignment
         </button>
     </a>
+
     <mat-list>
         <h3>Liste des assignments</h3>
         <nav *ngIf="assignments && assignments.length ; else assignmentsVide">
@@ -35,6 +36,18 @@
             </div>
         </ng-template>
     </mat-list>
+    <mat-paginator #paginator
+               class="demo-paginator"
+               (page)="handlePageEvent($event)"
+               [length]="totalDocs"
+               [pageSize]="pageSize"
+               [disabled]="disabled"
+               [showFirstLastButtons]="showFirstLastButtons"
+               [pageSizeOptions]="pageSizeOptions"
+               [hidePageSize]="false"
+               [pageIndex]="pageIndex"
+               aria-label="Select page">
+    </mat-paginator>
 </main>
 
 <!-- <app-assignment-detail [assignmentTransmis]="assignmentSelectionne"></app-assignment-detail> -->

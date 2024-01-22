@@ -5,6 +5,6 @@ Repository où déposer le projet n°2 Angular
 
 ### Binome 2 : Mahussi Jeff Fidele DATONGNON
  
-## Réalisations[^3]
+## Réalisations[]
 - [x] ...
 - [x] ...

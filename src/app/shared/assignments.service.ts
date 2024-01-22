@@ -41,6 +41,10 @@ export class AssignmentsService {
     )
   }
 
+  getAssignmentsPagine(page: number, limit: number): Observable<any> {
+    return this.http.get<any[]>(this.getUrl("/assignments?page=" +page + "&limit=" + limit));
+  }
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.log(operation + " a échoué");

@@ -22,13 +22,16 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log("login: " + this.login + " password: " + this.password);
-    const logged = this.authService.logIn(this.login, this.password); 
-    if (!logged) {
-      alert("Login ou mot de passe incorrect");
-    }else {
-      this.router.navigate(['/home']);
-    }
-    
+    const logged = this.authService.logIn(this.login, this.password).subscribe({
+      next: data => {
+        console.log(data);
+        this.authService.loggedIn = true;
+        this.authService.setUserInfos(data.token)
+        this.router.navigate(['/home']);
+      },
+      error: error => {
+        alert(error.error.message)
+      }
+    });
   }
 }

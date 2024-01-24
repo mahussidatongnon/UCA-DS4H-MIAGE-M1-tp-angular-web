@@ -49,9 +49,12 @@
 
     </mat-drawer>
     <mat-drawer-content>
-        <button mat-flat-button color="primary" [ngStyle]="{'margin-top': '10px'}" (click)="onClickPeuplerBD($event)">
+        <!-- <button *ngIf="" mat-flat-button color="primary" [ngStyle]="{'margin-top': '10px'}" (click)="onClickPeuplerBD($event)">
             Peupler BD
         </button>
+        <ng-template #bdDejaPeupler>
+
+        </ng-template> -->
         <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>

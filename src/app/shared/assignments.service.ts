@@ -5,6 +5,8 @@ import { map, tap, catchError } from 'rxjs/operators';
 import { LoggingService } from './logging.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { bdInitialAssignments } from './data';
+import { AuthService } from './auth.service';
+import { UniversalAppInterceptor } from './universal-app-interceptor.service';
 
 @Injectable({
   providedIn: 'root' // permet d'éviter les ajouts dans les modules
@@ -21,8 +23,12 @@ export class AssignmentsService {
     })
   };
 
-  constructor(private logginService: LoggingService, private http: HttpClient) { }
+  constructor(private logginService: LoggingService, private authService: AuthService, private http: HttpClient, private universalAppInterceptor: UniversalAppInterceptor) { }
   
+  getUrl(endpoint: string): string {
+    return this.authService.getUrl(endpoint);
+  }
+
   getAssignments(): Observable<Assignment[]> {
     // return of(this.assignments);
     return this.http.get<Assignment[]>(this.getUrl("/assignments"));
@@ -37,7 +43,7 @@ export class AssignmentsService {
         return assignment;
       }),
       tap(assignment => console.log("log depuis le tap", assignment)),
-      catchError(this.handleError<Assignment>(`getAssignment(id=${id})`))
+      // catchError(this.handleError<Assignment>(`getAssignment(id=${id})`))
     )
   }
 
@@ -73,10 +79,6 @@ export class AssignmentsService {
       id = Math.round(Math.random() * 100)
     }
     return id
-  }
-
-  getUrl(endpoint: string): string {
-    return this.base_api + endpoint;
   }
 
   peuplerBD() {

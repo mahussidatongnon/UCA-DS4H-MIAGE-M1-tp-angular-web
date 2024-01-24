@@ -28,6 +28,17 @@ import { AddAssignmentComponent } from './assignments/add-assignment/add-assignm
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import { LoginComponent } from './login/login.component'; // CLI imports AppRoutingModule
 
+
+import { Provider } from '@angular/core';
+
+// Injection token for the Http Interceptors multi-provider
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { UniversalAppInterceptor } from './shared/universal-app-interceptor.service';
+
+/** Provider for the Noop Interceptor. */
+export const noopInterceptorProvider: Provider =
+  { provide: HTTP_INTERCEPTORS, useClass: UniversalAppInterceptor, multi: true };
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,7 +70,9 @@ import { LoginComponent } from './login/login.component'; // CLI imports AppRout
     HttpClientModule,
     MatPaginatorModule,
   ],
-  providers: [],
+  providers: [
+    noopInterceptorProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

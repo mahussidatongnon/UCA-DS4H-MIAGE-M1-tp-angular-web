@@ -40,6 +40,5 @@ section {
 }
 
 mat-drawer-content {
-    height: calc(205vh -115vh);
-    /* height: 2500px; */
+    height: calc(100vh - 64px);
 }

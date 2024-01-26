@@ -27,6 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import { LoginComponent } from './login/login.component'; // CLI imports AppRoutingModule
+import { MatTableModule } from '@angular/material/table';
 
 
 import { Provider } from '@angular/core';
@@ -69,6 +70,7 @@ export const noopInterceptorProvider: Provider =
     MatSlideToggleModule,
     HttpClientModule,
     MatPaginatorModule,
+    MatTableModule
   ],
   providers: [
     noopInterceptorProvider

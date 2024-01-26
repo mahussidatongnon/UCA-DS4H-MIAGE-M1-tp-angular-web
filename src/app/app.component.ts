@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AuthService } from './shared/auth.service';
 import { Router } from '@angular/router';
 import { AssignmentsService } from './shared/assignments.service';
+import { MatDrawer } from '@angular/material/sidenav';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +18,8 @@ export class AppComponent {
   loginLabel!: string;
   isLoggedLabael = "Se connecter";
   isNotLoggedLabel = "Se déconecter";
+  @ViewChild('drawer') drawer!: MatDrawer; // Définissez une référence au mat-drawer
+
 
   constructor(public authService: AuthService, private router: Router, private assignmentService: AssignmentsService) { }
 
@@ -44,5 +48,15 @@ export class AppComponent {
       console.log("LA BD A ETE PEUPLEE");
       this.router.navigate(['/home'], {replaceUrl: true});
     });
+  }
+
+  isAuthenticated(): Observable<boolean> {
+    return this.authService.isAuthenticated;
+  }
+
+  toggleDrawer(): void {
+    if (this.isAuthenticated() && this.drawer) {
+      this.drawer.toggle(); // Appel à la méthode toggle() seulement si drawer est défini
+    }
   }
 }

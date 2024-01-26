@@ -9,7 +9,8 @@
     <span> 
         <h1>
             <nav>
-                <a routerLink="/home"> {{ title }} </a>
+                <a *ngIf="!authService.loggedIn" routerLink="/home"> {{ title }} </a>
+                <span *ngIf="authService.loggedIn"> Bienvenu {{ authService.current_user?.login }} </span>
             </nav>
         </h1>
     </span>
@@ -24,25 +25,25 @@
     </a>
 </mat-toolbar>
 
-<mat-drawer-container hasBackdrop="false">
+<mat-drawer-container  hasBackdrop="false">
     <mat-drawer #drawer [mode]="'side'" id="mat-drawner-elements">
         <button mat-button aria-label="Voir les devoirs" matTooltip="Liste des devoirs" routerLink="/home">
             <mat-icon>home</mat-icon>
-            <span>Liste des ...</span>
+            <span>Liste des devoir</span>
         </button>
-        <button mat-button aria-label="ajout devoir" matTooltip="Ajout d'un devoir" routerLink="add">
+        <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="ajout devoir" matTooltip="Ajout d'un devoir" routerLink="add">
             <mat-icon>home</mat-icon>
-            <span>Ajout d'un ...</span>
+            <span>Ajout d'un devoir</span>
         </button>
-        <button mat-button aria-label="modifier devoir" matTooltip="Modification d'un devoir" routerLink="#">
+        <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="modifier devoir" matTooltip="Modification d'un devoir" routerLink="#">
             <mat-icon>home</mat-icon>
             <span>Modification d'un ...</span>
         </button>
-        <button mat-button aria-label="supprmer devoir" matTooltip="Suppression d'un devoir" routerLink="#">
+        <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="supprmer devoir" matTooltip="Suppression d'un devoir" routerLink="#">
             <mat-icon>home</mat-icon>
             <span>Suppression d'un ...</span>
         </button>
-        <button mat-button aria-label="génerer donnée de test" matTooltip="Génération de donnée de tests" routerLink="#">
+        <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="génerer donnée de test" matTooltip="Génération de donnée de tests" routerLink="#">
             <mat-icon>home</mat-icon>
             <span>Génération de ...</span>
         </button>

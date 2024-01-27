@@ -19,7 +19,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
+import { AssignmentTabComponent } from './assignments/assignment-tab/assignment-tab.component';
 import { AppComponent } from './app.component';
 import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component'
 import { RenduDirective } from './shared/rendu.directive';
@@ -47,7 +49,8 @@ export const noopInterceptorProvider: Provider =
     AssignmentDetailComponent,
     AddAssignmentComponent,
     EditAssignmentComponent,
-    LoginComponent
+    LoginComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -69,6 +72,8 @@ export const noopInterceptorProvider: Provider =
     MatSlideToggleModule,
     HttpClientModule,
     MatPaginatorModule,
+    MatTableModule,
+    AssignmentTabComponent,
   ],
   providers: [
     noopInterceptorProvider

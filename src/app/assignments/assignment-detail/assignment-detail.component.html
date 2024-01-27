@@ -1,25 +1,22 @@
-<mat-card *ngIf="assignmentTransmis; else aucunAssignmentTransmis">
+<mat-card *ngIf="assignmentTransmis; else aucunAssignmentTransmis" class="assignCard">
     <mat-card-content>
         <mat-card-title [appRendu]="assignmentTransmis.rendu">
             {{ assignmentTransmis.nom }}
         </mat-card-title>
         <mat-card-subtitle>
-            {{ assignmentTransmis.dateDeRendu | date: 'dd/MM/yyyy' }}
+            Devoir à rendre le : {{ assignmentTransmis.dateDeRendu | date: 'dd/MM/yyyy' }}
         </mat-card-subtitle>
-        <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
-            Devoir rendu
-        </mat-checkbox>
-        <!-- <nav><a [routerLink]="['/assignment', assignmentTransmis.id, 'edit']">
-            <button mat-stroked-button color="primary" >
-                Edit
+        <div class="actions">
+            <mat-checkbox *ngIf="!assignmentTransmis.rendu" (click)="onAssignmentRendu()">
+                Devoir rendu
+            </mat-checkbox>
+            <button mat-stroked-button class="updateButton" (click)="onClickEdit()" [disabled]="!isAdmin()">
+                Editer
             </button>
-        </a></nav> -->
-        <button mat-stroked-button color="primary" (click)="onClickEdit()" [disabled]="!isAdmin()">
-            Edit
-        </button>
-        <button mat-flat-button color="warn" [ngStyle]="{'margin-left': '10px'}" (click)="onSupprimerAssignment()" [disabled]="!isAdmin()">
-            Supprimer
-        </button>
+            <button mat-flat-button class="deleteButton" (click)="onSupprimerAssignment()" [disabled]="!isAdmin()">
+                Supprimer
+            </button>
+        </div>
     </mat-card-content>
 </mat-card>
 <ng-template #aucunAssignmentTransmis>

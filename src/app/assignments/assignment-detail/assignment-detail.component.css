@@ -1,0 +1,21 @@
+.assignCard {
+    display: flex;
+    flex-direction: column;
+
+}
+.actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.deleteButton {
+    background-color: #f84434;
+    color: whitesmoke;
+    margin-left: 5px;
+}
+.updateButton {
+    background-color: #e98410;
+    color: whitesmoke;
+    margin-left: 70px;
+}

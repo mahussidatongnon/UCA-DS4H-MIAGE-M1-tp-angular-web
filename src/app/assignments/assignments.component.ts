@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Assignment } from './assignment.model';
 import { AssignmentsService } from '../shared/assignments.service';
 import { PageEvent } from '@angular/material/paginator';
+import { AssignmentTabComponent } from './assignment-tab/assignment-tab.component';
 
 @Component({
   selector: 'app-assignments',
@@ -31,7 +31,7 @@ export class AssignmentsComponent implements OnInit {
 
 
 
-  constructor(private assignmentService: AssignmentsService) { }
+  constructor(private assignmentService: AssignmentsService, private assignTab: AssignmentTabComponent) { }
 
   ngOnInit(): void {
     // this.assignmentService.getAssignments().subscribe(assignments => {
@@ -54,7 +54,6 @@ export class AssignmentsComponent implements OnInit {
   assignmentClique(assignment: Assignment) {
     this.assignmentSelectionne = assignment;
   }
-
 
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;

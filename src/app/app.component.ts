@@ -14,8 +14,8 @@ export class AppComponent {
   title: string = "Application de gestion des devoirs à rendre (Assignments)";
   sidenavOpened: boolean = false;
   loginLabel!: string;
-  isLoggedLabael = "Se connecter";
-  isNotLoggedLabel = "Se déconecter";
+  isLoggedLabael = "Connexion";
+  isNotLoggedLabel = "Déconnexion";
 
   constructor(public authService: AuthService, private router: Router, private assignmentService: AssignmentsService) { }
 
@@ -45,4 +45,5 @@ export class AppComponent {
       this.router.navigate(['/home'], {replaceUrl: true});
     });
   }
+
 }

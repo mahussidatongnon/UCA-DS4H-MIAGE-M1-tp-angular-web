@@ -1,0 +1,86 @@
+/* .table {
+    width: 100%;
+  } */
+  
+  /* .mat-column-number {
+    width: 32px;
+    border-right: 1px solid currentColor;
+    padding-right: 24px;
+    text-align: center;
+  }
+  
+  .mat-column-name {
+    padding-left: 16px;
+    font-size: 20px;
+  }
+   */
+
+   .container {
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 20px;
+}
+
+.mat-elevation-z8 {
+    box-shadow: 0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12);
+}
+
+table {
+    width: 100%;
+}
+
+th.mat-header-cell, td.mat-cell {
+    padding: 8px;
+    text-align: left;
+}
+
+a.mat-flat-button {
+    margin-right: 8px;
+    text-decoration: none;
+}
+
+.mat-row:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+.mat-paginator {
+    background: transparent;
+    padding: 10px;
+}
+
+.subject-image {
+  width: 50px; /* Ajustez la taille selon vos besoins */
+  height: auto;
+  border-radius: 4px; /* Arrondir les coins pour l'esthétique */
+  margin-right: 8px;
+}
+
+.student-image {
+  width: 30px; /* Ajustez la taille selon vos besoins */
+  height: 30px;
+  border-radius: 50%; /* Image circulaire pour l'étudiant */
+  object-fit: cover;
+  margin-right: 8px;
+  transition: filter 0.7s; /* Ajoutez une transition pour un effet visuel doux */
+
+}
+
+.student-info {
+  display: flex;
+  align-items: center;
+}
+
+.student-name {
+  display: inline-block;
+  max-width: 120px; /* Ajustez la taille selon vos besoins */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Ajoute des points de suspension si le texte dépasse la taille maximale */
+  transition: filter 0.7s; /* Ajoutez une transition pour un effet visuel doux */
+}
+
+.blur {
+  filter: blur(5px); /* Ajustez la valeur du flou au besoin */
+}
+

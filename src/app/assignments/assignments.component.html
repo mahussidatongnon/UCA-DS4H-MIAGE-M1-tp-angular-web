@@ -4,38 +4,50 @@
             Ajouter Assignment
         </button>
     </a>
+    <h3>Liste des assignments</h3>
 
-    <mat-list>
-        <h3>Liste des assignments</h3>
-        <nav *ngIf="assignments && assignments.length ; else assignmentsVide">
-            <a routerLink="/assignment/{{ assignment.id }}" *ngFor="let assignment of assignments" (click)="assignmentClique(assignment)">
-                <mat-list-item [appRendu]="assignment.rendu">
-                    <mat-icon mat-list-icon>assignment</mat-icon>
-                    <h4 mat-line > {{ assignment.dateDeRendu | date }} </h4>
-                    <div mat-line matListItemLine *ngIf="assignment.rendu; else nomsoumis">
-                        {{assignment.nom}}
-                        <span mat-line>
-                            [Rendu]
-                        </span>
-                    </div>
-                    <ng-template #nomsoumis matListItemLine>
-                        <div mat-line>
-                            {{assignment.nom}}
-                            <span mat-line>
-                                [Non Rendu]
-                            </span>
-                        </div>
-                    </ng-template>
-                </mat-list-item>
-                <mat-divider></mat-divider>
-            </a>
-        </nav>
-        <ng-template #assignmentsVide>
-            <div>
-                Aucun assignment à afficher
-            </div>
-        </ng-template>
-    </mat-list>
+    <div class="filter-bar">
+        <!-- Champs de filtrage -->
+        <mat-form-field appearance="fill">
+            <mat-label>Filtrer par nom</mat-label>
+            <input matInput [(ngModel)]="filters.nom" placeholder="Nom de l'assignment" (keyup)="applyFilter()">
+        </mat-form-field>
+    
+        <!-- Filtre Élève -->
+        <mat-form-field appearance="fill" [class.blur]="!isAdmin()">
+            <mat-label>Filtrer par étudiant</mat-label>
+            <mat-select [(value)]="filters.studentId" (selectionChange)="applyFilter()">
+                <mat-option *ngFor="let student of getStudents()" [value]="student._id">
+                    {{ student.firstName }} {{ student.lastName }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <!-- Filtre Prof -->
+        <mat-form-field appearance="fill">
+            <mat-label>Filtrer par matière</mat-label>
+            <mat-select [(value)]="filters.subjectId" (selectionChange)="applyFilter()">
+                <mat-option *ngFor="let subject of subjects" [value]="subject._id">
+                    {{ subject.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <mat-slide-toggle [(ngModel)]="filters.rendu" (change)="applyFilter()">Rendu</mat-slide-toggle>
+    
+        <button mat-button (click)="resetFilters()">Vider</button>
+    </div>
+    
+    <app-assignment-tab 
+        *ngIf="assignments && assignments.length; else assignmentsVide"
+        [dataSource]="assignments"
+    ></app-assignment-tab>
+    
+    <ng-template #assignmentsVide>
+        <div>
+            Aucun assignment à afficher
+        </div>
+    </ng-template>
     <mat-paginator #paginator
                class="demo-paginator"
                (page)="handlePageEvent($event)"

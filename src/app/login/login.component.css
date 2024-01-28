@@ -1,0 +1,29 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh; /* Utilisez la hauteur de la fenêtre pour centrer verticalement */
+    padding: 20px; /* Espace autour du formulaire pour éviter qu'il touche les bords */
+}
+
+mat-card {
+    max-width: 400px; /* Largeur maximale de la carte pour éviter qu'elle ne soit trop large sur les grands écrans */
+    width: 100%; /* Utilisez tout l'espace disponible jusqu'à la largeur maximale */
+    margin: 20px; /* Espace autour de la carte */
+}
+
+mat-form-field {
+    width: 100%; /* Les champs de formulaire utilisent toute la largeur de la carte */
+}
+
+button[mat-raised-button] {
+    width: 100%; /* Le bouton de soumission utilise toute la largeur */
+    margin-top: 20px; /* Espace avant le bouton de soumission */
+}
+
+/* Styles pour l'espacement et l'apparence des inputs et des icônes */
+mat-icon {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+/* Vous pouvez ajouter des styles supplémentaires pour les couleurs, les polices, etc. */

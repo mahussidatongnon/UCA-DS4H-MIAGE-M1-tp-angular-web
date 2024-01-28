@@ -6,7 +6,7 @@ import { MatButtonModule}   from '@angular/material/button';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,7 +19,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
+import { AssignmentTabComponent } from './assignments/assignment-tab/assignment-tab.component';
 import { AppComponent } from './app.component';
 import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component'
 import { RenduDirective } from './shared/rendu.directive';
@@ -27,7 +34,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import { LoginComponent } from './login/login.component'; // CLI imports AppRoutingModule
-import { MatTableModule } from '@angular/material/table';
 
 
 import { Provider } from '@angular/core';
@@ -48,7 +54,8 @@ export const noopInterceptorProvider: Provider =
     AssignmentDetailComponent,
     AddAssignmentComponent,
     EditAssignmentComponent,
-    LoginComponent
+    LoginComponent,
+    AssignmentTabComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +77,13 @@ export const noopInterceptorProvider: Provider =
     MatSlideToggleModule,
     HttpClientModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatMenuModule,
+    MatExpansionModule,
+    MatSnackBarModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [
     noopInterceptorProvider

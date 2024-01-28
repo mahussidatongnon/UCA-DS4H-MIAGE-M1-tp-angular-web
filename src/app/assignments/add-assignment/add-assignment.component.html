@@ -6,7 +6,8 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Choisir la date</mat-label>
-        <input matInput [matDatepicker]="picker" placeholder="Date de rendu" [(ngModel)]="dateDeRendu" name="dateDeRendu">
+        <input matInput [matDatepicker]="picker" placeholder="Date de rendu" [(ngModel)]="dateDeRendu"
+            name="dateDeRendu">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
@@ -14,6 +15,75 @@
 
 
     <button mat-stroked-button color="primary">
-		Ajouter un devoir
-	</button>
+        Ajouter un devoir
+    </button>
 </form>
+
+<mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Informations sur le devoir</ng-template>
+            <mat-form-field>
+                <mat-label>Intitulé du devoir</mat-label>
+                <input matInput placeholder="Entrez le nom du devoir" formControlName="firstCtrl"
+                    [(ngModel)]="nomDevoir" name="nomDevoir" required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Matière</mat-label>
+                <mat-select [(value)]="subjects" >
+                    <mat-option *ngFor="let subject of subjects" [value]="subject._id" (onSelectionChange)="subjectName">
+                        {{ subject.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div>
+                <button mat-stroked-button matStepperNext>Suivant</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Date de rendu</ng-template>
+            <mat-form-field>
+                <mat-label>Date butoire</mat-label>
+                <input matInput [matDatepicker]="picker" placeholder="Date de rendu" [(ngModel)]="dateDeRendu"
+                    name="dateDeRendu">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div>
+                <button mat-stroked-button matStepperPrevious>Retour</button>
+                <button mat-stroked-button matStepperNext>Suivant</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="thirdFormGroup">
+        <form [formGroup]="thirdFormGroup">
+            <ng-template matStepLabel>Informations supplémentaires</ng-template>
+            <mat-form-field>
+                <mat-label>Etudiant</mat-label>
+                
+                <mat-select [(value)]="students" >
+                    <mat-option *ngFor="let student of getStudents()" [value]="student._id">
+                        {{ student.firstName }} {{ student.lastName }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div>
+                <button mat-stroked-button matStepperPrevious>Retour</button>
+                <button mat-stroked-button matStepperNext>Suivant</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Terminé</ng-template>
+        <p>Vous avez fini.</p>
+        <div>
+            <button mat-stroked-button matStepperPrevious>retour</button>
+            <button mat-stroked-button color="primary">
+                Ajouter un devoir
+            </button>
+        </div>
+    </mat-step>
+</mat-stepper>

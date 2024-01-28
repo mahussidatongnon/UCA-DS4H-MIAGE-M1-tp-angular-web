@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
+import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { Assignment } from '../assignment.model';
 import { AssignmentsService } from 'src/app/shared/assignments.service';
 import { Router } from '@angular/router';
+import { Subject } from 'src/app/subject.model';
+import { Student } from 'src/app/student.model';
 
 @Component({
   selector: 'app-add-assignment',
@@ -13,9 +15,21 @@ export class AddAssignmentComponent implements OnInit {
   // ajoutActive: boolean = false
   nomDevoir?: string
   dateDeRendu?: Date
+  subject?: Subject
+  subjects?: Subject[]
+  student?: Student
+  students?: Student[]
+
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+
   // @Output() nouvelAssignment = new EventEmitter<Assignment>()
 
-  constructor(private assignmentService: AssignmentsService, private router: Router) { }
+  constructor(private assignmentService: AssignmentsService, private router: Router, private _formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     // setTimeout(() => {
@@ -36,7 +50,7 @@ export class AddAssignmentComponent implements OnInit {
           this.router.navigate(['/home']);
         });
         
-    }else {
+    } else {
         alert("Veuillez renseigner le nom du devoir et la date de rendu")
     }
   }

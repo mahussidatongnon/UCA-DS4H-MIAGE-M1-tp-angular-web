@@ -1,11 +1,11 @@
 # Angular : Projet Finale
 Repository où déposer le projet n°2 Angular
 
-### Binome 1 : Melissa SILVA FERNANDES
+### Etudiant 1 : Melissa SILVA FERNANDES
 
-### Binome 2 : Mahussi Jeff Fidele DATONGNON
+### Etudiant 2 : Mahussi Jeff Fidele DATONGNON
 
-### Binome 3 : Allaye BOCOUM
+### Etudiant 3 : Allaye BOCOUM
 
  
 Le back-end se trouve sur le repo [ici](https://github.com/mahussidatongnon/UCA-DS4H-MIAGE-M1-tp-angular-api)
@@ -20,8 +20,6 @@ Le back-end se trouve sur le repo [ici](https://github.com/mahussidatongnon/UCA-
   - on peut filtrer via le statut rendu 
   - on peut afficher tous les assignments d'un étudiant
   - on peut afficher tous les assignments d'une matières
-
-
 
 # Autres réalisations 
 - [x] Mise en place d'un intercepteur générale dans le front (Angular) pour ajouter le token quand une l'utilisateur est connecté

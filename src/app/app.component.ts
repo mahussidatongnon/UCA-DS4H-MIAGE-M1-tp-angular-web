@@ -16,8 +16,8 @@ export class AppComponent {
   title: string = "Application de gestion des devoirs à rendre (Assignments)";
   sidenavOpened: boolean = false;
   loginLabel!: string;
-  isLoggedLabael = "Se connecter";
-  isNotLoggedLabel = "Se déconecter";
+  isLoggedLabael = "Connexion";
+  isNotLoggedLabel = "Déconnexion";
   @ViewChild('drawer') drawer!: MatDrawer; // Définissez une référence au mat-drawer
 
 

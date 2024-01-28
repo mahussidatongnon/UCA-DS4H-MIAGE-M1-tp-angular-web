@@ -4,9 +4,9 @@
             Ajouter Assignment
         </button>
     </a>
-
     <mat-list>
         <h3>Liste des assignments</h3>
+        <app-assignment-tab></app-assignment-tab>
         <nav *ngIf="assignments && assignments.length ; else assignmentsVide">
             <a routerLink="/assignment/{{ assignment.id }}" *ngFor="let assignment of assignments" (click)="assignmentClique(assignment)">
                 <mat-list-item [appRendu]="assignment.rendu">

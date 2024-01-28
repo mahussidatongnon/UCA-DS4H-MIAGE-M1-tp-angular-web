@@ -1,24 +1,22 @@
-<mat-toolbar>
+<mat-toolbar color="primary" class="toolBar">
     <button mat-mini-fab color="primary" aria-label="Toogle sidenav" (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
     </button>
-    <button mat-icon-button aria-label="Go to home" routerLink="">
+    <button mat-icon-button aria-label="Go to home" routerLink="/home">
         <mat-icon>home</mat-icon>
     </button>
     <span class="example-spacer"></span>
     <span> 
-        <h1>
+        <h2>
             <nav>
-                <a *ngIf="!authService.loggedIn" routerLink="/home"> {{ title }} </a>
-                <span *ngIf="authService.loggedIn"> Bienvenu {{ authService.current_user?.login }} </span>
+                <a *ngIf="!authService.loggedIn" routerLink="/home" style="color:white"> {{ title }} </a>
+                <span *ngIf="authService.loggedIn"> Bienvenue {{ authService.current_user?.login }} </span>
             </nav>
-        </h1>
+        </h2>
     </span>
     <span class="example-spacer"></span>
-    <!-- <mat-slide-toggle [(ngModel)]="toggleLogin" (change)="onChangeToggleLogin($event)">Login!</mat-slide-toggle> -->
-    <a href="#" (click)="onChangeToggleLogin($event)">
+        <a href="#" (click)="onChangeToggleLogin($event)" style="color:white">
         {{ authService.loggedIn? isNotLoggedLabel: isLoggedLabael }}
-        <!-- {{ loginLabel }} -->
         <button mat-icon-button class="" aria-label="login">
             <mat-icon>person</mat-icon>
         </button>
@@ -28,34 +26,29 @@
 <mat-drawer-container  hasBackdrop="false">
     <mat-drawer #drawer [mode]="'side'" id="mat-drawner-elements">
         <button mat-button aria-label="Voir les devoirs" matTooltip="Liste des devoirs" routerLink="/home">
-            <mat-icon>home</mat-icon>
-            <span>Liste des devoir</span>
+            <mat-icon>dns</mat-icon>
+            <span>Liste des devoirs</span>
         </button>
         <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="ajout devoir" matTooltip="Ajout d'un devoir" routerLink="add">
-            <mat-icon>home</mat-icon>
+            <mat-icon>add_to_photos</mat-icon>
             <span>Ajout d'un devoir</span>
         </button>
-        <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="modifier devoir" matTooltip="Modification d'un devoir" routerLink="#">
-            <mat-icon>home</mat-icon>
-            <span>Modification d'un ...</span>
+        <button [disabled]="!(isAuthenticated() | async)"mat-button aria-label="modifier devoir" matTooltip="Modification d'un devoir" routerLink="#">
+            <mat-icon>edit</mat-icon>
+            <span>Modification d'un devoir</span>
         </button>
         <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="supprmer devoir" matTooltip="Suppression d'un devoir" routerLink="#">
-            <mat-icon>home</mat-icon>
-            <span>Suppression d'un ...</span>
+            <mat-icon>delete_forever</mat-icon>
+            <span>Suppression d'un devoir</span>
         </button>
-        <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="génerer donnée de test" matTooltip="Génération de donnée de tests" routerLink="#">
-            <mat-icon>home</mat-icon>
-            <span>Génération de ...</span>
+        <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="génerer donnée de test" matTooltip="Génération de donnée de tests"
+            routerLink="#">
+            <mat-icon>description</mat-icon>
+            <span>Génération de tests</span>
         </button>
 
     </mat-drawer>
     <mat-drawer-content>
-        <!-- <button *ngIf="" mat-flat-button color="primary" [ngStyle]="{'margin-top': '10px'}" (click)="onClickPeuplerBD($event)">
-            Peupler BD
-        </button>
-        <ng-template #bdDejaPeupler>
-
-        </ng-template> -->
         <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>

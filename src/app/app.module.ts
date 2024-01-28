@@ -19,7 +19,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule} from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
+import { AssignmentTabComponent } from './assignments/assignment-tab/assignment-tab.component';
 import { AppComponent } from './app.component';
 import { AssignmentDetailComponent } from './assignments/assignment-detail/assignment-detail.component'
 import { RenduDirective } from './shared/rendu.directive';
@@ -27,7 +29,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AddAssignmentComponent } from './assignments/add-assignment/add-assignment.component';
 import { EditAssignmentComponent } from './assignments/edit-assignment/edit-assignment.component';
 import { LoginComponent } from './login/login.component'; // CLI imports AppRoutingModule
-import { MatTableModule } from '@angular/material/table';
 
 
 import { Provider } from '@angular/core';
@@ -48,7 +49,8 @@ export const noopInterceptorProvider: Provider =
     AssignmentDetailComponent,
     AddAssignmentComponent,
     EditAssignmentComponent,
-    LoginComponent
+    LoginComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,8 @@ export const noopInterceptorProvider: Provider =
     MatSlideToggleModule,
     HttpClientModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    AssignmentTabComponent,
   ],
   providers: [
     noopInterceptorProvider

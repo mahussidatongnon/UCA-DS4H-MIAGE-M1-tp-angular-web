@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../user.model';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -13,33 +13,15 @@ export class AuthService {
   current_user?: User;
   currentToken?: string;
   currentTokenInfos?: any;
+  private isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
+  public isAuthenticated: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
   base_api: string = environment.api_base_url;
-  users: User[] = [
-    {
-      "login": "user1",
-      "password": "password1",
-      "role": "user"
-    },
-    {
-      "login": "user2",
-      "password": "password2",
-      "role": "user"
-    },
-    {
-      "login": "admin",
-      "password": "admin",
-      "role": "admin"
-    },
-    {
-      "login": "user4",
-      "password": "password4",
-      "role": "user"
-    }
-  ]
+  users: User[] = []
 
   constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.setAuthenticated(this.loggedIn);
   }
 
   getUrl(path: string): string {
@@ -68,6 +50,7 @@ export class AuthService {
 
   logout(): void {
     this.loggedIn = false;
+    this.setAuthenticated(false);
     this.current_user = undefined;
     console.log("LogOut");
   } 
@@ -106,6 +89,11 @@ export class AuthService {
     return isUserAdmin;
   }
 
+  public setAuthenticated(value: boolean): void {
+    this.isAuthenticatedSubject.next(value);
+  }
+
+
   setUserInfos(token: string): void {
     this.currentToken = token;
     let httpOptions = {
@@ -120,6 +108,7 @@ export class AuthService {
         user.role = data.user.role;
         this.current_user = user;
         this.loggedIn = true;
+        this.setAuthenticated(true);
         this.currentTokenInfos = data.tokenInfos
         console.log("LogIN");
       },

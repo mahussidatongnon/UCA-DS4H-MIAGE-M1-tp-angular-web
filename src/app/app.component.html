@@ -6,8 +6,13 @@
         <mat-icon>home</mat-icon>
     </button>
     <span class="example-spacer"></span>
-    <span>
-        <h2> {{ title }} </h2>
+    <span> 
+        <h2>
+            <nav>
+                <a *ngIf="!authService.loggedIn" routerLink="/home" style="color:white"> {{ title }} </a>
+                <span *ngIf="authService.loggedIn"> Bienvenue {{ authService.current_user?.login }} </span>
+            </nav>
+        </h2>
     </span>
     <span class="example-spacer"></span>
         <a href="#" (click)="onChangeToggleLogin($event)" style="color:white">
@@ -18,25 +23,25 @@
     </a>
 </mat-toolbar>
 
-<mat-drawer-container hasBackdrop="false">
+<mat-drawer-container  hasBackdrop="false">
     <mat-drawer #drawer [mode]="'side'" id="mat-drawner-elements">
         <button mat-button aria-label="Voir les devoirs" matTooltip="Liste des devoirs" routerLink="/home">
             <mat-icon>dns</mat-icon>
             <span>Liste des devoirs</span>
         </button>
-        <button mat-button aria-label="ajout devoir" matTooltip="Ajout d'un devoir" routerLink="add">
+        <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="ajout devoir" matTooltip="Ajout d'un devoir" routerLink="add">
             <mat-icon>add_to_photos</mat-icon>
             <span>Ajout d'un devoir</span>
         </button>
-        <button mat-button aria-label="modifier devoir" matTooltip="Modification d'un devoir" routerLink="#">
+        <button [disabled]="!(isAuthenticated() | async)"mat-button aria-label="modifier devoir" matTooltip="Modification d'un devoir" routerLink="#">
             <mat-icon>edit</mat-icon>
             <span>Modification d'un devoir</span>
         </button>
-        <button mat-button aria-label="supprmer devoir" matTooltip="Suppression d'un devoir" routerLink="#">
+        <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="supprmer devoir" matTooltip="Suppression d'un devoir" routerLink="#">
             <mat-icon>delete_forever</mat-icon>
             <span>Suppression d'un devoir</span>
         </button>
-        <button mat-button aria-label="génerer donnée de test" matTooltip="Génération de donnée de tests"
+        <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="génerer donnée de test" matTooltip="Génération de donnée de tests"
             routerLink="#">
             <mat-icon>description</mat-icon>
             <span>Génération de tests</span>

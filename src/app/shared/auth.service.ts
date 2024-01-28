@@ -104,7 +104,7 @@ export class AuthService {
     this.http.get(this.getUrl("/auth/me"), httpOptions).subscribe({
       next: (data: any) => {
         let user: User = new User();
-        user.login = data.user.name;
+        user.login = data.user.login;
         user.role = data.user.role;
         this.current_user = user;
         this.loggedIn = true;

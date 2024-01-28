@@ -10,7 +10,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoggingService } from 'src/app/shared/logging.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { AuthService } from 'src/app/shared/auth.service';
-import { Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
@@ -20,7 +19,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './assignment-tab.component.html',
   styleUrls: ['./assignment-tab.component.css']
 })
-
 export class AssignmentTabComponent implements OnInit {
 
   formVisible: boolean = false;
@@ -59,9 +57,14 @@ export class AssignmentTabComponent implements OnInit {
     }
     assignment.rendu = newValue.checked;
     if(!assignment) return;
-    this.assignmentService.updateAssignment(this.assignment).subscribe(message => {
-      this.loggingService.log(this.assignment.nom, "modifié");
-      console.log(message)
+    console.log("assignment", assignment);
+    
+    this.assignmentService.updateAssignment({...assignment}).subscribe(message => {
+      this.snackBar.open('Assignment modifié avec succès', 'Fermer', {
+        duration: 3000, // Durée d'affichage du snack bar en millisecondes
+        horizontalPosition: 'right', // Position horizontale (start, center, end, left, right)
+        verticalPosition: 'top', // Position verticale (top, bottom)
+      });
     });
   }
 
@@ -74,10 +77,10 @@ export class AssignmentTabComponent implements OnInit {
   }
 
   editAssignment(assignment: Assignment): void {
-    if (!this.authService.isAdmin()) {
+    if (this.isAdmin()) {
       this.assignmentService.updateAssignment(assignment).subscribe(message => {
         this.snackBar.open('Assignment modifié avec succès', 'Fermer', {
-          duration: 2000, // Durée d'affichage du snack bar en millisecondes
+          duration: 3000, // Durée d'affichage du snack bar en millisecondes
           horizontalPosition: 'right', // Position horizontale (start, center, end, left, right)
           verticalPosition: 'top', // Position verticale (top, bottom)
         });
@@ -85,10 +88,36 @@ export class AssignmentTabComponent implements OnInit {
     } else {
       this.snackBar.open('Vous n\'êtes pas admin. Connectez vous en tant qu\'admin pour modifier les assignments', 
       'Fermer', {
-        duration: 2000, // Durée d'affichage du snack bar en millisecondes
+        duration: 3000, // Durée d'affichage du snack bar en millisecondes
         horizontalPosition: 'right', // Position horizontale (start, center, end, left, right)
         verticalPosition: 'top', // Position verticale (top, bottom)
       });
     }
+  }
+
+  deleteAssignment(assignment: Assignment): void {
+    if (!this.isAdmin()) {
+      this.snackBar.open('Vous n\'êtes pas admin. Connectez vous en tant qu\'admin pour modifier les assignments', 
+      'Fermer', {
+        duration: 3000, // Durée d'affichage du snack bar en millisecondes
+        horizontalPosition: 'right', // Position horizontale (start, center, end, left, right)
+        verticalPosition: 'top', // Position verticale (top, bottom)
+      });
+    } else {
+      let snackBarRef = this.snackBar.open('Êtes-vous sûr de vouloir supprimer ça ?', 'Confirmer', {
+        duration: 7000
+      });
+      snackBarRef.onAction().subscribe(() => {
+        this.assignmentService.deleteAssignment(assignment).subscribe(message => {
+          this.snackBar.open('Assignment supprimé avec succès', 'Fermer', {
+            duration: 3000, // Durée d'affichage du snack bar en millisecondes
+            horizontalPosition: 'right', // Position horizontale (start, center, end, left, right)
+            verticalPosition: 'top', // Position verticale (top, bottom)
+          });
+          this.dataSource = this.dataSource.filter(a => a._id !== assignment._id);
+        });
+      });
+    }
+      
   }
 }

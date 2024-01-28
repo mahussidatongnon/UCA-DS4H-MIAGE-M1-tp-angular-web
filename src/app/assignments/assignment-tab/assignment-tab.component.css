@@ -62,6 +62,8 @@ a.mat-flat-button {
   border-radius: 50%; /* Image circulaire pour l'étudiant */
   object-fit: cover;
   margin-right: 8px;
+  transition: filter 0.7s; /* Ajoutez une transition pour un effet visuel doux */
+
 }
 
 .student-info {
@@ -75,5 +77,10 @@ a.mat-flat-button {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; /* Ajoute des points de suspension si le texte dépasse la taille maximale */
+  transition: filter 0.7s; /* Ajoutez une transition pour un effet visuel doux */
+}
+
+.blur {
+  filter: blur(5px); /* Ajustez la valeur du flou au besoin */
 }
 

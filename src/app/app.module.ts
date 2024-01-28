@@ -6,7 +6,7 @@ import { MatButtonModule}   from '@angular/material/button';
 import { AssignmentsComponent } from './assignments/assignments.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -23,6 +23,8 @@ import { MatTableModule } from '@angular/material/table';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 import { AssignmentTabComponent } from './assignments/assignment-tab/assignment-tab.component';
 import { AppComponent } from './app.component';
@@ -78,7 +80,10 @@ export const noopInterceptorProvider: Provider =
     MatTableModule,
     MatMenuModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule
   ],
   providers: [
     noopInterceptorProvider

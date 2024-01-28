@@ -3,7 +3,7 @@ import { Assignment } from '../assignments/assignment.model';
 import { Observable, of, forkJoin } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 import { LoggingService } from './logging.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { bdInitialAssignments } from './data';
 import { AuthService } from './auth.service';
 import { UniversalAppInterceptor } from './universal-app-interceptor.service';
@@ -12,8 +12,6 @@ import { UniversalAppInterceptor } from './universal-app-interceptor.service';
   providedIn: 'root' // permet d'éviter les ajouts dans les modules
 })
 export class AssignmentsService {
-
-  base_api: string = "https://uca-ds4h-miage-tp-final-angular-mm-api.onrender.com/api";
 
   assignments!: Assignment[];
 
@@ -47,8 +45,22 @@ export class AssignmentsService {
     )
   }
 
-  getAssignmentsPagine(page: number, limit: number): Observable<any> {
-    return this.http.get<any[]>(this.getUrl("/assignments?page=" +page + "&limit=" + limit));
+  getAssignmentsPagine(page: number, limit: number, filters:any = {}): Observable<any> {
+    let params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+
+    // Ajouter des paramètres de filtre si présents
+    Object.keys(filters).forEach(key => {
+      if (filters[key] !== null && filters[key] !== undefined) {
+        params = params.set(key, filters[key]);
+      }
+    });
+
+    console.log("filters", filters);
+    
+
+    return this.http.get<any[]>(this.getUrl("/assignments"), {params});
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -69,7 +81,7 @@ export class AssignmentsService {
   }
 
   updateAssignment(assignment: Assignment): Observable<Object> {
-    return this.http.put(this.getUrl("/assignments"), assignment);
+    return this.http.put(this.getUrl("/assignments"), assignment, this.httpOptions);
   }
 
   generateId(): number {

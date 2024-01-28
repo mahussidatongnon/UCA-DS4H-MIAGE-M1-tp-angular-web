@@ -37,9 +37,9 @@
             <ng-container matColumnDef="studentId">
                 <th mat-header-cell *matHeaderCellDef> Étudiant </th>
                 <td mat-cell *matCellDef="let assignment">
-                    <div class="student-info">
+                    <div class="student-info" [class.blur]="!isAdmin()">
                         <img [src]="assignment.studentId.pictureUrl" alt="{{ assignment.studentId.firstName }} {{ assignment.studentId.lastName }}" class="student-image">
-                        <div>
+                        <div >
                             <span class="student-name">{{ assignment.studentId.lastName.toUpperCase() }}, {{ assignment.studentId.firstName }}</span>
                         </div>
                     </div>
@@ -55,12 +55,16 @@
 
             <ng-container matColumnDef="actions">
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
-                <td mat-cell *matCellDef="let assignment">
-                    <button mat-icon-button color="primary" (click)="editAssignment(assignment)">
+                <td mat-cell *matCellDef="let assignment" [class.blur]="!isAdmin()">
+                    <button mat-icon-button color="primary" (click)="editAssignment(assignment)" aria-label="Edit assignment">
                         <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)="deleteAssignment(assignment)" aria-label="Delete assignment">
+                        <mat-icon style="color: red;">delete</mat-icon>
                     </button>
                 </td>
             </ng-container>
+            
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

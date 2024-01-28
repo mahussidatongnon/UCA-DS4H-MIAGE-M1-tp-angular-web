@@ -20,6 +20,7 @@ Le back-end se trouve sur le repos [ici](https://github.com/mahussidatongnon/UCA
   - on peut filtrer via le statut rendu 
   - on peut afficher tous les assignments d'un étudiant
   - on peut afficher tous les assignments d'une matières
+- [x] Video [ici](https://jeff-uca-angular-final.s3.eu-west-3.amazonaws.com/assets/video.mp4)
 
 # Autres réalisations 
 - [x] Mise en place d'un intercepteur générale dans le front (Angular) pour ajouter le token quand une l'utilisateur est connecté

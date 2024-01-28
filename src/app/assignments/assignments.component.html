@@ -4,9 +4,13 @@
             Ajouter Assignment
         </button>
     </a>
-    <mat-list>
-        <h3>Liste des assignments</h3>
-        <app-assignment-tab></app-assignment-tab>
+    <h3>Liste des assignments</h3>
+    <app-assignment-tab 
+        *ngIf="assignments && assignments.length ; else assignmentsVide"
+        [dataSource]="assignments"
+    ></app-assignment-tab>
+
+    <!-- <mat-list>
         <nav *ngIf="assignments && assignments.length ; else assignmentsVide">
             <a routerLink="/assignment/{{ assignment.id }}" *ngFor="let assignment of assignments" (click)="assignmentClique(assignment)">
                 <mat-list-item [appRendu]="assignment.rendu">
@@ -30,12 +34,12 @@
                 <mat-divider></mat-divider>
             </a>
         </nav>
-        <ng-template #assignmentsVide>
-            <div>
-                Aucun assignment à afficher
-            </div>
-        </ng-template>
-    </mat-list>
+    </mat-list> -->
+    <ng-template #assignmentsVide>
+        <div>
+            Aucun assignment à afficher
+        </div>
+    </ng-template>
     <mat-paginator #paginator
                class="demo-paginator"
                (page)="handlePageEvent($event)"

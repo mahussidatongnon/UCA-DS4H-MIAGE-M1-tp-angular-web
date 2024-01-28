@@ -50,7 +50,7 @@ export const noopInterceptorProvider: Provider =
     AddAssignmentComponent,
     EditAssignmentComponent,
     LoginComponent,
-    
+    AssignmentTabComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +73,6 @@ export const noopInterceptorProvider: Provider =
     HttpClientModule,
     MatPaginatorModule,
     MatTableModule,
-    AssignmentTabComponent,
   ],
   providers: [
     noopInterceptorProvider

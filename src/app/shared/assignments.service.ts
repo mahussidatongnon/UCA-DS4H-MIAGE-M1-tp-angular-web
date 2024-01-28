@@ -69,7 +69,6 @@ export class AssignmentsService {
   }
 
   updateAssignment(assignment: Assignment): Observable<Object> {
-    this.logginService.log(assignment.nom, "modifié");
     return this.http.put(this.getUrl("/assignments"), assignment);
   }
 

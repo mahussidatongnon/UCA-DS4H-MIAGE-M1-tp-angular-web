@@ -11,6 +11,7 @@ import { LoggingService } from 'src/app/shared/logging.service';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Observable } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -25,11 +26,12 @@ export class AssignmentTabComponent implements OnInit {
   formVisible: boolean = false;
   assignments!: Assignment[];
   assignment!: Assignment;
-  displayedColumns: string[] = ['nom', 'dateDeRendu', 'rendu', 'subjectId', 'studentId'];
+  displayedColumns: string[] = ['nom', 'rendu', 'dateDeRendu', 'studentId', 'subjectId', 'actions'];
   @Input() dataSource: Assignment[] = [];
   constructor(private assignmentService: AssignmentsService, 
     private loggingService: LoggingService,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackBar: MatSnackBar
     ) {}
 
   ngOnInit(): void {
@@ -69,5 +71,24 @@ export class AssignmentTabComponent implements OnInit {
 
   isAuthentified(): boolean {
     return this.authService.loggedIn;
+  }
+
+  editAssignment(assignment: Assignment): void {
+    if (!this.authService.isAdmin()) {
+      this.assignmentService.updateAssignment(assignment).subscribe(message => {
+        this.snackBar.open('Assignment modifié avec succès', 'Fermer', {
+          duration: 2000, // Durée d'affichage du snack bar en millisecondes
+          horizontalPosition: 'right', // Position horizontale (start, center, end, left, right)
+          verticalPosition: 'top', // Position verticale (top, bottom)
+        });
+      });
+    } else {
+      this.snackBar.open('Vous n\'êtes pas admin. Connectez vous en tant qu\'admin pour modifier les assignments', 
+      'Fermer', {
+        duration: 2000, // Durée d'affichage du snack bar en millisecondes
+        horizontalPosition: 'right', // Position horizontale (start, center, end, left, right)
+        verticalPosition: 'top', // Position verticale (top, bottom)
+      });
+    }
   }
 }

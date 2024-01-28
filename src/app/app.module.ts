@@ -20,6 +20,9 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AssignmentTabComponent } from './assignments/assignment-tab/assignment-tab.component';
 import { AppComponent } from './app.component';
@@ -73,6 +76,9 @@ export const noopInterceptorProvider: Provider =
     HttpClientModule,
     MatPaginatorModule,
     MatTableModule,
+    MatMenuModule,
+    MatExpansionModule,
+    MatSnackBarModule
   ],
   providers: [
     noopInterceptorProvider

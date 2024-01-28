@@ -10,42 +10,119 @@
         <h2>
             <nav>
                 <a *ngIf="!authService.loggedIn" routerLink="/home" style="color:white"> {{ title }} </a>
-                <span *ngIf="authService.loggedIn"> Bienvenue {{ authService.current_user?.login }} </span>
+                <!-- <span *ngIf="authService.loggedIn"> Bienvenue {{ authService.current_user?.login }} </span> -->
             </nav>
         </h2>
     </span>
     <span class="example-spacer"></span>
-        <a href="#" (click)="onChangeToggleLogin($event)" style="color:white">
+    <!-- <a href="#" (click)="onChangeToggleLogin($event)" style="color:white">
         {{ authService.loggedIn? isNotLoggedLabel: isLoggedLabael }}
         <button mat-icon-button class="" aria-label="login">
             <mat-icon>person</mat-icon>
         </button>
-    </a>
+    </a> -->
+    <button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="login">
+        <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #userMenu="matMenu">
+        <button *ngIf="!isAuthenticated()" mat-menu-item (click)="onChangeToggleLogin($event)">Se déconnecter</button>
+        <p *ngIf="isAuthenticated()" style="margin-left: 10px;">
+            {{ authService.current_user?.login }} 
+        </p>
+        <button *ngIf="isAuthenticated()" mat-menu-item (click)="onChangeToggleLogin($event)">Se connecter</button>
+    </mat-menu>
 </mat-toolbar>
 
 <mat-drawer-container  hasBackdrop="false">
     <mat-drawer #drawer [mode]="'side'" id="mat-drawner-elements">
-        <button mat-button aria-label="Voir les devoirs" matTooltip="Liste des devoirs" routerLink="/home">
+        <mat-accordion [multi]="true">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Devoirs
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <button mat-button routerLink="/home">
+                    <mat-icon>dns</mat-icon>
+                    <span>Liste des devoirs</span>
+                </button>
+                <button mat-button routerLink="add">
+                    <mat-icon>add_to_photos</mat-icon>
+                    <span>Ajout d'un devoir</span>
+                </button>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Matières
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <button mat-button routerLink="/liste-matieres">
+                    <mat-icon>dns</mat-icon>
+                    <span>Voir la liste</span>
+                </button>
+                <button mat-button routerLink="/ajout-matiere">
+                    <mat-icon>add_to_photos</mat-icon>
+                    <span>Ajouter</span>
+                </button>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Etudiants
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <button mat-button routerLink="/liste-etudiants">
+                    <mat-icon>dns</mat-icon>
+                    <span>Voir la liste</span>
+                </button>
+                <button mat-button routerLink="/ajout-etudiant">
+                    <mat-icon>add_to_photos</mat-icon>
+                    <span>Ajouter</span>
+                </button>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Professeurs
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <button mat-button routerLink="/liste-professeurs">
+                    <mat-icon>dns</mat-icon>
+                    <span>Voir la liste</span>
+                </button>
+                <button mat-button routerLink="/ajout-professeur">
+                    <mat-icon>add_to_photos</mat-icon>
+                    <span>Ajouter</span>
+                </button>
+            </mat-expansion-panel>
+            
+
+        </mat-accordion>
+        <!-- <button mat-button aria-label="Voir les devoirs" matTooltip="Liste des devoirs" routerLink="/home">
             <mat-icon>dns</mat-icon>
             <span>Liste des devoirs</span>
         </button>
         <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="ajout devoir" matTooltip="Ajout d'un devoir" routerLink="add">
             <mat-icon>add_to_photos</mat-icon>
             <span>Ajout d'un devoir</span>
-        </button>
-        <button [disabled]="!(isAuthenticated() | async)"mat-button aria-label="modifier devoir" matTooltip="Modification d'un devoir" routerLink="#">
+        </button> -->
+        <!-- <button [disabled]="!(isAuthenticated() | async)"mat-button aria-label="modifier devoir" matTooltip="Modification d'un devoir" routerLink="#">
             <mat-icon>edit</mat-icon>
             <span>Modification d'un devoir</span>
-        </button>
-        <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="supprmer devoir" matTooltip="Suppression d'un devoir" routerLink="#">
+        </button> -->
+        <!-- <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="supprmer devoir" matTooltip="Suppression d'un devoir" routerLink="#">
             <mat-icon>delete_forever</mat-icon>
             <span>Suppression d'un devoir</span>
-        </button>
-        <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="génerer donnée de test" matTooltip="Génération de donnée de tests"
+        </button> -->
+        <!-- <button [disabled]="!(isAuthenticated() | async)" mat-button aria-label="génerer donnée de test" matTooltip="Génération de donnée de tests"
             routerLink="#">
             <mat-icon>description</mat-icon>
             <span>Génération de tests</span>
-        </button>
+        </button> -->
 
     </mat-drawer>
     <mat-drawer-content>

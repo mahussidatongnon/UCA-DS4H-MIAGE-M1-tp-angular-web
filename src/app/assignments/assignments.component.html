@@ -9,8 +9,8 @@
         *ngIf="assignments && assignments.length ; else assignmentsVide"
         [dataSource]="assignments"
     ></app-assignment-tab>
-
-    <!-- <mat-list>
+<!-- 
+    <mat-list>
         <nav *ngIf="assignments && assignments.length ; else assignmentsVide">
             <a routerLink="/assignment/{{ assignment.id }}" *ngFor="let assignment of assignments" (click)="assignmentClique(assignment)">
                 <mat-list-item [appRendu]="assignment.rendu">
@@ -34,7 +34,8 @@
                 <mat-divider></mat-divider>
             </a>
         </nav>
-    </mat-list> -->
+    </mat-list>
+     -->
     <ng-template #assignmentsVide>
         <div>
             Aucun assignment à afficher
